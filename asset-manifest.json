@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Odin-NotReddit/static/css/main.eee57e11.css",
+    "main.js": "/Odin-NotReddit/static/js/main.51028c34.js",
+    "index.html": "/Odin-NotReddit/index.html",
+    "main.eee57e11.css.map": "/Odin-NotReddit/static/css/main.eee57e11.css.map",
+    "main.51028c34.js.map": "/Odin-NotReddit/static/js/main.51028c34.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eee57e11.css",
+    "static/js/main.51028c34.js"
+  ]
+}
