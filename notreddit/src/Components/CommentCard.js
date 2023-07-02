@@ -1,5 +1,7 @@
 import React from "react";
-import Score from "./Score";
+import CommentScoreAuth from "./CommentScoreAuth";
+import CommentScoreNoAuth from "./CommentScoreNoAuth";
+import { auth } from "../config/firestore";
 
 export default function CommentCard(props) {
 
@@ -17,17 +19,22 @@ export default function CommentCard(props) {
   }
 
   return (
-    <div id="container" className="flex px-4 py-2 gap-4 w-[40rem] rounded-md border border-gray-300 hover:border-gray-400 bg-white cursor-pointer shadow-md transition-all">
-      <div id="score">
-        <Score score={props.score}/>
+    <div id="container" className="flex pl-4 pr-8 gap-4 w-[40rem] rounded-md border border-gray-300 hover:border-gray-400 bg-white cursor-pointer shadow-md hover:translate-y-[-3px] transition-all">
+      <div id="score" className="flex justify-center items-start py-2">
+        { auth.currentUser ? <CommentScoreAuth score={ props.score } votes={ props.votes } id={ props.id } commentId={ props.commentId }/> : <CommentScoreNoAuth score={ props.score }/> }
       </div>
-      <div id="contentContainer" className="flex flex-col gap-1">
-        <div id="user" className="flex gap-2 text-gray-500 text-xs">
-          <span>posted by {props.user}</span>
-          <span>{processTime(props.creationDate)} ago</span>
-        </div>
-        <div id="content" className="text-lg h-8">
-          {props.content}
+      <div id="contentContainer" className="flex flex-col gap-1 py-2">
+        <div className="flex flex-col py-2 gap-2">
+          <div id="user" className="flex gap-1 text-gray-500 text-xs col-span-1">
+            <span>posted by { props.user }</span>
+            <span>•</span>
+            <span>{ processTime(props.creationDate) } ago</span>
+          </div>
+          <div id="content" className="min-h-8 col-span-1">
+            { props.content }
+          </div>
+          <div className="flex items-end justify-start">
+          </div>
         </div>
       </div>
     </div>

@@ -1,59 +1,77 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, UNSAFE_RouteContext } from "react-router-dom";  
-import { getDocs, collection } from "@firebase/firestore";
-import { db } from "./config/firestore";
-import PostCard from "./Components/PostCard";
-import FilterPosts from "./Components/FilterPosts";
-import CreatePost from "./Components/CreatePost";
-import AddComment from "./Components/AddComment";
+import { Route, Routes } from "react-router-dom";  
 import PostPage from "./Components/PostPage";
 import FrontPage from "./Components/FrontPage";
+import SignUp from "./Components/SignUp";
+import SignIn from "./Components/SignIn";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "./config/firestore";
+import { getDocs, collection } from "firebase/firestore";
+import _ from "lodash";
 
 function App() {
 
-  // const [posts, setPosts] = useState()
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // const getPosts = async () => {
-  //   const querySnapshot = await getDocs(collection(db, "Posts"));
-  //   const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  //   setPosts(data);
-  // };
+  const getPosts = async () => {
+    const queryPostSnapshot = await getDocs(collection(db, "Posts"));
+    const postData = queryPostSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const queryVoteSnapshot = await getDocs(collection(db, "Votes"));
+    const voteData = queryVoteSnapshot.docs.map(doc => ({ id: doc.id, votes: doc.data() }));
+    for (let post of postData) {
+      post.commentsCount = await fetchPostComments(post);
+      for (let vote of voteData) {
+        if (post.id === vote.id) {
+          post.score = fetchPostScore(vote.votes);
+          post.votes = vote.votes;
+        }
+      }
+    }
+    setPosts(postData);
+    setIsLoading(false);
+  };
 
-  // const fetchPostComments = async (post) => {
-  //   const querySnapshot = await getDocs(collection(db, "Posts", post.id, "comments"));
-  //   const commentsCount = querySnapshot.size;
-  //   return { ...post, commentsCount };
-  // };
+  const fetchPostComments = async (object) => {
+    const querySnapshot = await getDocs(collection(db, "Posts", object.id, "comments"));
+    return querySnapshot.size;
+  };
 
-  // const fetchCommentsForPosts = async () => {
-  //   const updatedPosts = await Promise.all(posts.map(fetchPostComments));
-  //   setPosts(updatedPosts);
-  // };
+  const fetchPostScore = (obj) => {
+    const values = Object.values(obj);
+    const sum = values.reduce((accumulator, value) => {
+      return accumulator + value;
+    }, 0);
+    return sum;
+  }
 
-  // useEffect(() => {
-  //   getPosts();
-  //   if (posts) {
-  //     fetchCommentsForPosts();
-  //   }
-  // }, []);
+  useEffect(() => {
+    getPosts();
+  },[])
 
-  // const postCards = posts?.map((post, index) => {
-  //   return <PostCard key={index} id={post.id} title={post.title} creationDate={post.creationDate} text={post.text} imageLink={post.imageLink} postLink={post.postLink} score={post.score} user={post.user} commentsCount={post.commentsCount}/>
-  // })
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        // ...
+        console.log("uid", uid)
+      } else {
+        // User is signed out
+        // ...
+        console.log("User is logged out")
+      }
+    });
+  }, [])
 
   return (
-
     <Routes>
-      <Route path="/" element={<FrontPage />} />
-      <Route path="/post/:id" element={<PostPage />} />
+      <Route path="/" element={ <FrontPage posts={ posts } isLoading={ isLoading }/> } />
+      <Route path="/post/:id" element={ <PostPage posts={ posts } /> } />
+      <Route path="/signup" element={ <SignUp/> }/>
+      <Route path="/login" element={ <SignIn/> }/>
     </Routes>
-    
-    // <div id="container" className="flex flex-col gap-4 p-4 bg-slate-200 justify-center items-center">
-    //   <CreatePost/>
-    //   <AddComment/>
-    //   <FilterPosts/>
-    //   {posts && postCards}
-    // </div>
   );
 }
 
