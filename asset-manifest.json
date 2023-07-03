@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/%3Crepository-name%3E/static/css/main.eee57e11.css",
-    "main.js": "/%3Crepository-name%3E/static/js/main.efa11871.js",
-    "index.html": "/%3Crepository-name%3E/index.html",
-    "main.eee57e11.css.map": "/%3Crepository-name%3E/static/css/main.eee57e11.css.map",
-    "main.efa11871.js.map": "/%3Crepository-name%3E/static/js/main.efa11871.js.map"
+    "main.css": "/Odin-NotReddit/static/css/main.eee57e11.css",
+    "main.js": "/Odin-NotReddit/static/js/main.51028c34.js",
+    "index.html": "/Odin-NotReddit/index.html",
+    "main.eee57e11.css.map": "/Odin-NotReddit/static/css/main.eee57e11.css.map",
+    "main.51028c34.js.map": "/Odin-NotReddit/static/js/main.51028c34.js.map"
   },
   "entrypoints": [
     "static/css/main.eee57e11.css",
-    "static/js/main.efa11871.js"
+    "static/js/main.51028c34.js"
   ]
 }
