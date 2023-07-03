@@ -65,11 +65,11 @@ export default function AddComment(props) {
             </svg>
             <span className="text-white">Add a Comment</span>
           </button> :
-          <a href="/login">
+          <Link to="/login">
             <button className="flex items-center justify-center bg-lime-500 rounded-xl hover:text-xl hover:rounded hover:bg-lime-600 text-white w-[18rem] h-[2.5rem] gap-2 px-2 transition-all" type="button" onClick={ handleButtonPress }>
               <span className="text-white">Login to add a Comment</span>
             </button>
-          </a>
+          </Link>
           }
       </div>
       }

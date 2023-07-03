@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PostCardContent(props) {
 
@@ -31,7 +32,7 @@ export default function PostCardContent(props) {
       }
       { props.postLink &&
         <div className="pr-10" id="postLink">
-          <a href={ props.postLink } className="text-blue-600 hover:underline">{ props.postLink }</a>
+          <Link to={ props.postLink } className="text-blue-600 hover:underline">{ props.postLink }</Link>
         </div>
       }
       { props.text &&

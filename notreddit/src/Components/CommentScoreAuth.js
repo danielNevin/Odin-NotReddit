@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../config/firestore";
 import { doc, updateDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 export default function CommentScoreAuth(props) {
 

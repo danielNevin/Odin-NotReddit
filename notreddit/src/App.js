@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./config/firestore";
 import { getDocs, collection } from "firebase/firestore";
 import _ from "lodash";
+import { HashRouter as Router } from "react-router-dom";
 
 function App() {
 
@@ -66,12 +67,14 @@ function App() {
   }, [])
 
   return (
-    <Routes>
-      <Route path="/" element={ <FrontPage posts={ posts } isLoading={ isLoading }/> } />
-      <Route path="/post/:id" element={ <PostPage posts={ posts } /> } />
-      <Route path="/signup" element={ <SignUp/> }/>
-      <Route path="/login" element={ <SignIn/> }/>
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={ <FrontPage posts={ posts } isLoading={ isLoading }/> } />
+        <Route path="/post/:id" element={ <PostPage posts={ posts } /> } />
+        <Route path="/signup" element={ <SignUp/> }/>
+        <Route path="/login" element={ <SignIn/> }/>
+      </Routes>
+    </Router>
   );
 }
 

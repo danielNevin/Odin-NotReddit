@@ -42,7 +42,7 @@ export default function About() {
     let classes = 'text-gray-500 font-semibold transition-all';
 
     if (isMidDivHovered) {
-      classes = 'text-cyan-600 font-semibold transition-all'
+      classes = 'text-sky-500 font-semibold transition-all'
     }
 
     return classes;
@@ -52,7 +52,7 @@ export default function About() {
     let classes = 'text-gray-500 font-semibold transition-all';
 
     if (isMidDivHovered) {
-      classes = 'text-sky-600 font-semibold transition-all'
+      classes = 'text-blue-600 font-semibold transition-all'
     }
 
     return classes;

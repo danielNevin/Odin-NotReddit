@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firestore';
 import { NavLink, useNavigate } from 'react-router-dom'
 import HeaderSignup from './HeaderSignup';
+import { Link } from 'react-router-dom';
  
 export default function SignIn() {
   const navigate = useNavigate();
@@ -53,11 +54,11 @@ export default function SignIn() {
           </div>
           <div className='flex flex-col items-center w-[20rem] justify-center gap-4 p-8 rounded-md shadow-lg hover:shadow-xl transition-all border text-gray-500'>
             No account yet? {' '}
-            <a href="/signup" >
+            <Link to="/signup" >
               <button className="bg-lime-500 hover:text-xl hover:rounded hover:bg-lime-600 text-white w-[6rem] h-[2.5rem] rounded-xl transition-all" >
                 Sign up
               </button>
-            </a>
+            </Link>
           </div>  
         </section>
       </div>

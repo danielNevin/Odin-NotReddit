@@ -8,6 +8,7 @@ import BackToTopButton from "./BackToTopButton";
 import PostScoreNoAuth from "./PostScoreNoAuth";
 import { auth } from "../config/firestore";
 import About from "./About";
+import { Link } from "react-router-dom";
 
 export default function FrontPage(props) {
 
@@ -46,9 +47,9 @@ export default function FrontPage(props) {
         <div id="score">
           { auth.currentUser ? <PostScoreAuth score={ post.score } votes={ post.votes } id={ post.id }/> : <PostScoreNoAuth score={ post.score }/> }
         </div>
-        <a href={`/post/${ post.id }`}>
+        <Link to={`/post/${ post.id }`}>
           <PostCardContentFrontPage id={ post.id } title={ post.title } creationDate={ post.creationDate } text={ post.text } imageLink={ post.imageLink } postLink={ post.postLink } score={ post.score } user={ post.user } commentsCount={ post.commentsCount } />
-        </a>
+        </Link>
       </div> 
     ) 
   })

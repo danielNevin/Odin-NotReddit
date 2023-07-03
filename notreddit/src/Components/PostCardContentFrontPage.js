@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PostCardContentFrontPage(props) {
 
@@ -31,7 +32,7 @@ export default function PostCardContentFrontPage(props) {
       }
       { props.postLink &&
         <div className="pr-10 flex flex-col gap-1 w-[32rem] line-clamp-6" id="postLink">
-          <a href={ props.postLink } className="text-blue-600 hover:underline">{ props.postLink }</a>
+          <Link to={ props.postLink } className="text-blue-600 hover:underline">{ props.postLink }</Link>
         </div>
       }
       { props.text &&
