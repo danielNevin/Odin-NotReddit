@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Odin-NotReddit/static/css/main.255bd591.css",
-    "main.js": "/Odin-NotReddit/static/js/main.0050a6af.js",
+    "main.js": "/Odin-NotReddit/static/js/main.cae733fd.js",
     "index.html": "/Odin-NotReddit/index.html",
     "main.255bd591.css.map": "/Odin-NotReddit/static/css/main.255bd591.css.map",
-    "main.0050a6af.js.map": "/Odin-NotReddit/static/js/main.0050a6af.js.map"
+    "main.cae733fd.js.map": "/Odin-NotReddit/static/js/main.cae733fd.js.map"
   },
   "entrypoints": [
     "static/css/main.255bd591.css",
-    "static/js/main.0050a6af.js"
+    "static/js/main.cae733fd.js"
   ]
 }
