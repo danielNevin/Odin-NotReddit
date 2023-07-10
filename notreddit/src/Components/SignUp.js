@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../config/firestore';
 import HeaderSignup from './HeaderSignup';
 import { Link } from 'react-router-dom'; 
 
 export default function SignUp() {
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('')
@@ -30,7 +31,7 @@ export default function SignUp() {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
-    }
+  }
 
   return (
     <main className='flex flex-col items-center bg-stone-50 min-h-screen'>    

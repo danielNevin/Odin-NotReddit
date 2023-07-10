@@ -101,11 +101,13 @@ export default function PostScoreAuth(props) {
   useEffect(() => {
     setScore(props.score)
     console.log(props.votes);
-    if (props.votes[auth.currentUser.uid] === 1) {
-      setUpvoteClick(true);
-    }
-    if (props.votes[auth.currentUser.uid] === -1) {
-      setDownvoteClick(true);
+    if (props.votes) {
+      if (props.votes[auth.currentUser.uid] === 1) {
+        setUpvoteClick(true);
+      }
+      if (props.votes[auth.currentUser.uid] === -1) {
+        setDownvoteClick(true);
+      }
     }
   }, [])
 

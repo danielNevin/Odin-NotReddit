@@ -14,8 +14,9 @@ export default function CreatePostTextInput(props) {
     const dbRefScore = collection(db, "Votes");
     const data = {
       title: title,
+      text: content,
       user: auth.currentUser.displayName,
-      creationDate: Date.now(),
+      creationDate: Date.now()
     };
     addDoc(dbRefPost, data)
       .then(docRef => {

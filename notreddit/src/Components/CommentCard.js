@@ -2,6 +2,7 @@ import React from "react";
 import CommentScoreAuth from "./CommentScoreAuth";
 import CommentScoreNoAuth from "./CommentScoreNoAuth";
 import { auth } from "../config/firestore";
+import { clean } from "profanity-cleaner";
 
 export default function CommentCard(props) {
 
@@ -31,7 +32,7 @@ export default function CommentCard(props) {
             <span>{ processTime(props.creationDate) } ago</span>
           </div>
           <div id="content" className="min-h-8 col-span-1">
-            { props.content }
+            { clean(props.content, { keepFirstAndLastChar: true }) }
           </div>
           <div className="flex items-end justify-start">
           </div>

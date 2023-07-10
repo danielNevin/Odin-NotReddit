@@ -21,20 +21,14 @@ export default function CreatePostLinkInput(props) {
     addDoc(dbRefPost, data)
       .then(docRef => {
         docId = docRef.id;
+        setDoc(doc(db, "Votes", docId), {
+          [auth.currentUser.uid]: 1
+        });
         console.log("Document has been added successfully");
       })
       .catch(error => {
         console.log(error);
       })
-    setDoc(doc(db, "Votes", docId), {
-      [auth.currentUser.uid]: 1
-    })
-    .then(dbRefScore => {
-      console.log("Post vote directory has been initialized successfully");
-    })
-    .catch(error => {
-      console.log(error);
-    })
     props.handleCancelClick();
   }  
 

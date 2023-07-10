@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { clean } from 'profanity-cleaner';
 
 export default function PostCardContentFrontPage(props) {
 
@@ -23,7 +24,7 @@ export default function PostCardContentFrontPage(props) {
         <span>{ processTime(props.creationDate) } ago</span>
       </div>
       <div id="title" className="text-lg h-8">
-        { props.title }
+        { clean(props.title, { keepFirstAndLastChar: true }) }
       </div>
       { props.imageLink &&
         <div className="pr-10 flex flex-col w-[34rem]" id="image">
@@ -37,7 +38,7 @@ export default function PostCardContentFrontPage(props) {
       }
       { props.text &&
         <div className="flex flex-col gap-1 w-[34rem] line-clamp-6" id="text">
-          <span className="line-clamp-6 pr-10">{ props.text }</span>
+          <span className="line-clamp-6 pr-10">{ clean(props.text, { keepFirstAndLastChar: true }) }</span>
         </div>
       }   
       <div id="comments" className="flex gap-1">
