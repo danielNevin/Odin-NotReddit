@@ -14,6 +14,8 @@ The project was built using React, TailwindCSS, and Firebase.
 
 - Once posted, Users can edit the text of their post and if they desire, can also delete the post from the Firestore completely.
 
+If you want to have a look, just press the Github-pages button to the right of this README to do so.
+
 **Disclaimer: NotReddit does not aim to compete against Reddit in any form and was only built for educational purposes**
 
 
