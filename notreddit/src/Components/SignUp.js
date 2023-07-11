@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../config/firestore';
@@ -9,12 +9,14 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
+  // State Declarations
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
+  // Handle Sign Up form submission
   const onSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -22,9 +24,9 @@ export default function SignUp() {
         const user = userCredential.user;
         updateProfile(auth.currentUser, {
           displayName: username
-        })
+        });
         console.log(user);
-        navigate("/login")
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -57,7 +59,7 @@ export default function SignUp() {
                   <label className='col-span-1 text-gray-500' htmlFor="username">
                     Username:
                   </label>
-                  <input className="bg-stone-50 rounded-full shadow-inner h-8 w-[20rem] px-4 focus:outline-none focus:outline-lime-500 focus:bg-stone-100 transition-all hover:bg-stone-100 col-span-2" type="username" label="Choose Username" value={ email } onChange={ (e) => setUsername(e.target.value) } required placeholder="Username"/>
+                  <input className="bg-stone-50 rounded-full shadow-inner h-8 w-[20rem] px-4 focus:outline-none focus:outline-lime-500 focus:bg-stone-100 transition-all hover:bg-stone-100 col-span-2" type="username" label="Choose Username" value={ username } onChange={ (e) => setUsername(e.target.value) } required placeholder="Username"/>
                 </div>
               </div>                                                                                                                          
               <button className="bg-lime-500 hover:text-xl hover:rounded hover:bg-lime-600 text-white w-[6rem] h-[2.5rem] rounded-xl transition-all" type="submit" onClick={ onSubmit }>  

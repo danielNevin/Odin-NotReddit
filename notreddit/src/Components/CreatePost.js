@@ -1,8 +1,10 @@
+// Importing Dependencies and necessary Components 
 import React, { useState } from "react";
 import CreatePostCard from "./CreatePostCard/CreatePostCard";
 
 export default function CreatePost(props) {
 
+  // Declaring state variables
   const [isPostInputClicked, setIsPostInputClicked] = useState(false);
   const [isImageButtonClicked, setIsImageButtonClicked] = useState(false);
   const [isLinkButtonClicked, setIsLinkButtonClicked] = useState(false);
@@ -23,6 +25,7 @@ export default function CreatePost(props) {
     postClick ? setPostHover(false) : setPostHover(true);
   };
 
+  // Handle clicking logic for the Post Input Box
   const handlePostInputClick = () => {
     setIsPostInputClicked(true);
     setIsImageButtonClicked(false);
@@ -32,6 +35,7 @@ export default function CreatePost(props) {
     setLinkClick(false);
   }
 
+  // Handle clicking logic for the Image Button
   const handleImageButtonClick = () => {
     setIsPostInputClicked(false);
     setIsImageButtonClicked(true);
@@ -41,6 +45,7 @@ export default function CreatePost(props) {
     setLinkClick(false);
   }
 
+  // Handle clicking logic for the Post Link Button
   const handleLinkButtonClick = () => {
     setIsPostInputClicked(false);
     setIsImageButtonClicked(false);
@@ -50,6 +55,7 @@ export default function CreatePost(props) {
     setLinkClick(true);
   }
 
+  // Handle clicking logic for the Post Tab
   const handlePostClick = () => {
     setPostHover(false);
     setPostClick(true);
@@ -63,6 +69,7 @@ export default function CreatePost(props) {
     imageClick ? setImageHover(false) : setImageHover(true);
   };
 
+  // Handle clicking logic for the Image Tab
   const handleImageClick = () => {
     setPostHover(false);
     setPostClick(false);
@@ -76,6 +83,7 @@ export default function CreatePost(props) {
     linkClick ? setLinkHover(false) : setLinkHover(true);
   };
 
+  // Handle clicking logic for the Link Tab
   const handleLinkClick = () => {
     setPostHover(false);
     setPostClick(false);
@@ -91,6 +99,7 @@ export default function CreatePost(props) {
     setLinkHover(false);
   }
 
+  // Handle clicking logic for the Cancel button
   const handleCancelClick = () => {
     setPostClick(false);
     setImageClick(false);
@@ -115,6 +124,7 @@ export default function CreatePost(props) {
     setIsLinkButtonHovered(false);
   } 
 
+  // Handle dynamic styling for the image SVG in the image Button
   const imageSVGClasses = () => {
     let classes = 'transition-all fill-gray-500';
     if (isImageButtonHovered) {
@@ -124,6 +134,7 @@ export default function CreatePost(props) {
     return classes;
   }
 
+  // Handle dynamic styling for the link SVG in the link Button
   const linkSVGClasses = () => {
     let classes = 'transition-all fill-gray-500';
     if (isLinkButtonHovered) {

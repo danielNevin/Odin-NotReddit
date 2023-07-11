@@ -1,29 +1,33 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firestore';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import HeaderSignup from './HeaderSignup';
 import { Link } from 'react-router-dom';
  
 export default function SignIn() {
+
   const navigate = useNavigate();
+
+  // State Declarations
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-      
+
+  // Handle login form submission
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      navigate("/")
-      console.log(user);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage)
-    });
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate("/");
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   }
  
   return(
@@ -48,8 +52,8 @@ export default function SignIn() {
                 </div>               
               </div>   
               <button className="bg-lime-500 hover:text-xl hover:rounded hover:bg-lime-600 text-white w-[6rem] h-[2.5rem] rounded-xl transition-all" onClick={ onLogin }>      
-                  Login                                                                  
-                </button>                         
+                Login                                                                  
+              </button>                         
             </form>                
           </div>
           <div className='flex flex-col items-center w-[20rem] justify-center gap-4 p-8 rounded-md shadow-lg hover:shadow-xl transition-all border text-gray-500'>

@@ -1,3 +1,4 @@
+// Importing Dependencies and necessary Components 
 import React, { useState } from "react";
 import { db } from "../config/firestore";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
@@ -6,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function AddComment(props) {
 
+  // State variables to track button press and comment content
   const [isButtonPressed, setIsButtonPressed] = useState(false);
   const [commentContent, setCommentContent] = useState('');
 
@@ -19,13 +21,21 @@ export default function AddComment(props) {
   }
 
   const handleCommentSubmission = () => {
+
+    // Assign the Cloud Firestore reference
     const commRef = collection(db, "Posts", props.postid, "comments");
+
+    // Fill the data object
     const data = {
       content: commentContent,
       user: auth.currentUser.displayName,
       creationDate: Date.now(),
     };
+
+    // Add the data object to the Cloud Firestore under the postID passed from the parent Post
     addDoc(commRef, data)
+
+      // Upvote the comment using the current userID
       .then(commRef => {
         let commId = commRef.id;
         setDoc(doc(db, "Posts", props.postid, "commentVotes", commId), {
@@ -36,6 +46,8 @@ export default function AddComment(props) {
       .catch(error => {
         console.log(error);
       })
+
+    // Add new comment to page without re-render
     const updatedComments = [data, ...props.comments];
     props.setComments(updatedComments);
     handleCancelPress();

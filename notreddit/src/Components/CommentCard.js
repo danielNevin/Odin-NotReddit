@@ -1,3 +1,4 @@
+// Importing Dependencies and necessary Components 
 import React from "react";
 import CommentScoreAuth from "./CommentScoreAuth";
 import CommentScoreNoAuth from "./CommentScoreNoAuth";
@@ -6,6 +7,7 @@ import { clean } from "profanity-cleaner";
 
 export default function CommentCard(props) {
 
+  // Converts the ms from epoch to more "human" units
   const processTime = (date) => {
     let timeSincePost = Date.now() - date;
     if (timeSincePost >= 86400000) {

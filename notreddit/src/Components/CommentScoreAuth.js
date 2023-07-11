@@ -1,15 +1,19 @@
+// Importing Dependencies and necessary Components 
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../config/firestore";
 import { doc, updateDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
 
 export default function CommentScoreAuth(props) {
 
+  // Declaring state variables
   const [upvoteClick, setUpvoteClick] = useState(false);
   const [downvoteClick, setDownvoteClick] = useState(false);
   const [score, setScore] = useState()
 
+  // Function for handling the Firestore interactions for each condition an Upvote can happen in
   const handleUpvoteClick = async () => {
+
+    // If the comment is already Upvoted (score = 1) => set upvoteClick and downvoteClick to false and subtract 1 from the score (score = 0)
     if (upvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(false);
@@ -18,6 +22,8 @@ export default function CommentScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 0
       });
+
+    // If the comment is already Downvoted (score = -1) => set downvoteClick to false, upvoteClick to true, and add 2 to the score (score = 1)
     } else if (downvoteClick) {
       setUpvoteClick(true);
       setDownvoteClick(false);
@@ -26,6 +32,8 @@ export default function CommentScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 1
       });
+
+    // If the comment is neither Upvoted nor Downvoted (score = 0) => set upvoteClick to true, downvoteClick to false, and add 1 to the score (score = 1)
     } else {
       setUpvoteClick(true);
       setDownvoteClick(false);
@@ -37,7 +45,10 @@ export default function CommentScoreAuth(props) {
     }
   }
 
+  // Function for handling the Firestore interactions for each condition a Downvote can happen in
   const handleDownvoteClick = async () => {
+
+    // If the comment is already Downvoted (score = -1) => set upvoteClick and downvoteClick to false and add 1 from the score (score = 0)
     if (downvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(false);
@@ -46,6 +57,8 @@ export default function CommentScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 0
       });
+
+    // If the comment is already Upvoted (score = 1) => set upvoteClick to false, downvoteClick to true, and subtract 2 from the score (score = -1)
     } else if (upvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(true);
@@ -54,6 +67,8 @@ export default function CommentScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: -1
       });
+
+    // If the comment is neither Upvoted nor Downvoted (score = 0) => set downvoteClick to true, upvoteClick to false, and subtract 1 from the score (score = -1)
     } else {
       setUpvoteClick(false);
       setDownvoteClick(true);
@@ -65,6 +80,7 @@ export default function CommentScoreAuth(props) {
     }
   }
 
+  // Function for handling the dynamic styling of the upvote arrow
   const upvoteSVGClasses = () => {
     let classes;
     if (upvoteClick) {
@@ -75,6 +91,7 @@ export default function CommentScoreAuth(props) {
     return classes;
   }
 
+  // Function for handling the dynamic styling of the downvote arrow
   const downvoteSVGClasses = () => {
     let classes;
     if (downvoteClick) {
@@ -85,6 +102,7 @@ export default function CommentScoreAuth(props) {
     return classes;
   } 
 
+  // Function for handling the dynamic styling of the score number
   const scoreClasses = () => {
     let classes = 'text-gray-500';
 
@@ -99,14 +117,22 @@ export default function CommentScoreAuth(props) {
     return classes;
   }
 
+  // If the user has already voted on this comment, set the conditions of the vote
   useEffect(() => {
     setScore(props.score)
     console.log(props.votes);
-    if (props.votes[auth.currentUser.uid] === 1) {
+    if (props.votes) {
+      if (props.votes[auth.currentUser.uid] === 1) {
+        setUpvoteClick(true);
+      }
+      if (props.votes[auth.currentUser.uid] === -1) {
+        setDownvoteClick(true);
+      }
+
+    // If the comment does not have any votes cast, show the default behaviour of the user automatically upvoting the post
+    } else {
+      setScore(1);
       setUpvoteClick(true);
-    }
-    if (props.votes[auth.currentUser.uid] === -1) {
-      setDownvoteClick(true);
     }
   }, [])
 

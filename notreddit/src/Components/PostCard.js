@@ -1,3 +1,4 @@
+// Importing Dependencies and necessary Components 
 import React from "react";
 import PostScoreAuth from "./PostScoreAuth";
 import PostCardContent from "./PostCardContent";

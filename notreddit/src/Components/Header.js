@@ -1,3 +1,4 @@
+// Importing Dependencies and necessary Components
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firestore";
@@ -8,6 +9,7 @@ export default function Header(props) {
 
   const navigate = useNavigate();
 
+  // State variables
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const [isUserHovered, setIsUserHovered] = useState(false);
   const [isUserClicked, setIsUserClicked] = useState(false);
@@ -16,6 +18,7 @@ export default function Header(props) {
   const [searchInput, setSearchInput] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
 
+  // Event handlers
   const handleLogoHover = () => {
     setIsLogoHovered(true);
   }
@@ -42,6 +45,7 @@ export default function Header(props) {
     setSearchInput('');
   }
 
+  // Functions to dynamically generate CSS classes based on state
   const logoSVGClass = () => {
     let classes = 'fill-lime-500 transition-all';
 
@@ -82,6 +86,7 @@ export default function Header(props) {
     return classes;
   }
 
+  // Search functionality
   const handleSearch = (event, posts) => {
     const userInput = event.target.value;
     setSearchInput(userInput);
@@ -93,21 +98,21 @@ export default function Header(props) {
     }
   }
 
+  // Logout functionality
   const handleLogout = () => {               
     signOut(auth).then(() => {
-    // Sign-out successful.
       navigate("/");
       console.log("Signed out successfully");
       handleUserClick();
     }).catch((error) => {
-    // An error happened.
+      console.log(error);
     });
   }
 
+  // Update posts when the prop changes
   useEffect(() => {
     setPosts(props.posts);
   }, [props.posts]);
-  
 
   return (
     <>

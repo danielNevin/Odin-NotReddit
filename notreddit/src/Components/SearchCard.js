@@ -1,7 +1,9 @@
+// Importing Dependencies
 import React from "react";
 
 export default function SearchCard(props) {
 
+  // Converts the ms from epoch to more "human" units
   const processTime = (date) => {
     let timeSincePost = Date.now() - date;
     if (timeSincePost >= 86400000) {

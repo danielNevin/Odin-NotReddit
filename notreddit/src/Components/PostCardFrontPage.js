@@ -1,3 +1,4 @@
+// Importing Dependencies and necessary Components 
 import React from "react";
 import ScoreAuth from "./PostScoreAuth";
 import ScoreNoAuth from "./PostScoreNoAuth";

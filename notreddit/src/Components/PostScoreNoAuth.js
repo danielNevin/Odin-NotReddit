@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function PostScoreNoAuth(props) {
 
+  // State Declarations
   const [upvoteHover, setUpvoteHover] = useState(false);
   const [downvoteHover, setDownvoteHover] = useState(false);
 
@@ -19,6 +20,7 @@ export default function PostScoreNoAuth(props) {
     setDownvoteHover(false);
   }
 
+  // Determine the classes for the upvote SVG
   const upvoteSVGClasses = () => {
     let classes;
     if (upvoteHover) {
@@ -29,6 +31,7 @@ export default function PostScoreNoAuth(props) {
     return classes;
   }
 
+  // Determine the classes for the downvote SVG
   const downvoteSVGClasses = () => {
     let classes;
     if (downvoteHover) {
@@ -41,6 +44,7 @@ export default function PostScoreNoAuth(props) {
 
   return (
     <div id="container" className="flex flex-col justify-center items-center w-6 gap-1 p-1">
+      {/* Links to Login page when user with no auth clicks */}
       <Link to="/login">
         <button id="upvote" className="bg-white rounded-sm hover:bg-gray-100 cursor-pointer transition-all p-[0.1rem]" onMouseEnter={ handleUpvoteHover } onMouseLeave={ handleMouseLeave }> 
           <svg className={ upvoteSVGClasses() } xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="16">
@@ -51,6 +55,7 @@ export default function PostScoreNoAuth(props) {
       <span id="score" className="text-gray-500">
         { props.score }
       </span>
+      {/* Links to Login page when user with no auth clicks */}
       <Link to="/login">
         <button id="downvote" className="bg-white rounded-sm hover:bg-gray-100 cursor-pointer transition-all p-[0.1rem]" onMouseEnter={ handleDownvoteHover } onMouseLeave={ handleMouseLeave }>
           <svg className={ downvoteSVGClasses() } xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="16">

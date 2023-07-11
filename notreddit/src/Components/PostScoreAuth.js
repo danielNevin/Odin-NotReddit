@@ -1,3 +1,4 @@
+// Importing Dependencies
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../config/firestore";
 import { doc, updateDoc } from "firebase/firestore";
@@ -8,7 +9,10 @@ export default function PostScoreAuth(props) {
   const [downvoteClick, setDownvoteClick] = useState(false);
   const [score, setScore] = useState()
 
+  // Function for handling the Firestore interactions for each condition an Upvote can happen in
   const handleUpvoteClick = async () => {
+
+    // If the Post is already Upvoted (score = 1) => set upvoteClick and downvoteClick to false and subtract 1 from the score (score = 0)
     if (upvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(false);
@@ -17,6 +21,8 @@ export default function PostScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 0
       });
+
+    // If the Post is already Downvoted (score = -1) => set downvoteClick to false, upvoteClick to true, and add 2 to the score (score = 1)
     } else if (downvoteClick) {
       setUpvoteClick(true);
       setDownvoteClick(false);
@@ -25,6 +31,8 @@ export default function PostScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 1
       });
+
+    // If the Post is neither Upvoted nor Downvoted (score = 0) => set upvoteClick to true, downvoteClick to false, and add 1 to the score (score = 1)
     } else {
       setUpvoteClick(true);
       setDownvoteClick(false);
@@ -36,7 +44,10 @@ export default function PostScoreAuth(props) {
     }
   }
 
+  // Function for handling the Firestore interactions for each condition a Downvote can happen in
   const handleDownvoteClick = async () => {
+
+    // If the Post is already Downvoted (score = -1) => set upvoteClick and downvoteClick to false and add 1 from the score (score = 0)
     if (downvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(false);
@@ -45,6 +56,8 @@ export default function PostScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: 0
       });
+
+    // If the Post is already Upvoted (score = 1) => set upvoteClick to false, downvoteClick to true, and subtract 2 from the score (score = -1)
     } else if (upvoteClick) {
       setUpvoteClick(false);
       setDownvoteClick(true);
@@ -53,6 +66,8 @@ export default function PostScoreAuth(props) {
       await updateDoc(docRef, {
         [auth.currentUser.uid]: -1
       });
+
+    // If the Post is neither Upvoted nor Downvoted (score = 0) => set downvoteClick to true, upvoteClick to false, and subtract 1 from the score (score = -1)
     } else {
       setUpvoteClick(false);
       setDownvoteClick(true);
@@ -64,6 +79,7 @@ export default function PostScoreAuth(props) {
     }
   }
 
+  // Function for handling the dynamic styling of the upvote arrow
   const upvoteSVGClasses = () => {
     let classes;
     if (upvoteClick) {
@@ -74,6 +90,7 @@ export default function PostScoreAuth(props) {
     return classes;
   }
 
+  // Function for handling the dynamic styling of the downvote arrow
   const downvoteSVGClasses = () => {
     let classes;
     if (downvoteClick) {
@@ -84,6 +101,7 @@ export default function PostScoreAuth(props) {
     return classes;
   } 
 
+  // Function for handling the dynamic styling of the score number
   const scoreClasses = () => {
     let classes = 'text-gray-500';
 
@@ -98,9 +116,9 @@ export default function PostScoreAuth(props) {
     return classes;
   }
 
+  // If the user has already voted on this Post, set the conditions of the vote
   useEffect(() => {
     setScore(props.score)
-    console.log(props.votes);
     if (props.votes) {
       if (props.votes[auth.currentUser.uid] === 1) {
         setUpvoteClick(true);

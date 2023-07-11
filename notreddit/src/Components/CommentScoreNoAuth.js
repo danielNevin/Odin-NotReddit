@@ -1,8 +1,10 @@
+// Importing Dependencies and necessary Components 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function CommentScoreNoAuth(props) {
 
+  // Declaring state variables
   const [upvoteHover, setUpvoteHover] = useState(false);
   const [downvoteHover, setDownvoteHover] = useState(false);
 
@@ -19,6 +21,7 @@ export default function CommentScoreNoAuth(props) {
     setDownvoteHover(false);
   }
 
+  // Handle the dynamic styling of the upvote container when hovering
   const upvoteSVGClasses = () => {
     let classes;
     if (upvoteHover) {
@@ -29,6 +32,7 @@ export default function CommentScoreNoAuth(props) {
     return classes;
   }
 
+  // Handle the dynamic styling of the downvote container when hovering
   const downvoteSVGClasses = () => {
     let classes;
     if (downvoteHover) {

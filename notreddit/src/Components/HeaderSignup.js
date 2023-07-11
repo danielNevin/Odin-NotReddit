@@ -1,18 +1,23 @@
+// Importing necessary dependencies and components from external modules or files.
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function HeaderSignup(props) {
 
+  // State variables
   const [isLogoHovered, setIsLogoHovered] = useState(false);
 
+  // Event handler for when the logo is hovered.
   const handleLogoHover = () => {
     setIsLogoHovered(true);
   }
 
+  // Event handler for when the mouse leaves the logo.
   const handleMouseLeave = () => {
     setIsLogoHovered(false);
   };
 
+  // Function to dynamically generate the CSS class for the logo SVG element.
   const logoSVGClass = () => {
     let classes = 'fill-lime-500 transition-all';
 
@@ -23,6 +28,7 @@ export default function HeaderSignup(props) {
     return classes;
   }
 
+  // Function to dynamically generate the CSS class for the logo text element.
   const logoTextClass = () => {
     let classes = 'text-2xl text-lime-500 transition-all tracking-widest';
 
@@ -36,6 +42,7 @@ export default function HeaderSignup(props) {
   return (
     <>
       <div id="container" className="grid grid-cols-3 bg-white shadow-md w-screen">
+        {/* Logo */}
         <Link to="/">
           <div id="logo-container" className="flex items-center justify-start gap-2 py-2 px-6 cursor-pointer" onMouseEnter={ handleLogoHover } onMouseLeave={ handleMouseLeave }>
             <svg className={ logoSVGClass() } xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">

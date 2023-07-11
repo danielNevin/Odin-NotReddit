@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+// Importing Dependencies
+import React, { useState } from "react";
 
 export default function FilterPosts(props) {
 
+  // State variables to keep track of filter clicks
   const [topClick, setTopClick] = useState(true);
   const [newClick, setNewClick] = useState(false);
   const [oldClick, setOldClick] = useState(false);
 
+  // Event handler for the top filter click
   const handleTopClick = () => {
     setNewClick(false);
     setOldClick(false);
@@ -13,6 +16,7 @@ export default function FilterPosts(props) {
     props.handleFilterTop();
   };
 
+  // Event handler for the new filter click
   const handleNewClick = () => {
     setTopClick(false);
     setOldClick(false);
@@ -20,6 +24,7 @@ export default function FilterPosts(props) {
     props.handleFilterNew();
   };
 
+  // Event handler for the old filter click
   const handleOldClick = () => {
     setTopClick(false);
     setNewClick(false);
@@ -27,6 +32,7 @@ export default function FilterPosts(props) {
     props.handleFilterOld();
   };
 
+  // Function to determine the CSS classes for the top filter
   const topClickClasses = () => {
     let classes = 'flex items-center gap-1 text-gray-500 hover:bg-gray-200 px-2 cursor-pointer rounded-full';
 
@@ -37,6 +43,7 @@ export default function FilterPosts(props) {
     return classes;
   }
 
+  // Function to determine the CSS classes for the new filter
   const newClickClasses = () => {
     let classes = 'flex items-center gap-1 text-gray-500 hover:bg-gray-200 px-2 cursor-pointer rounded-full';
 
@@ -47,6 +54,7 @@ export default function FilterPosts(props) {
     return classes;
   }
 
+  // Function to determine the CSS classes for the old filter
   const oldClickClasses = () => {
     let classes = 'flex items-center gap-1 text-gray-500 hover:bg-gray-200 px-2 cursor-pointer rounded-full';
 
