@@ -1,9 +1,12 @@
 // Importing necessary dependencies and components
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { clean } from 'profanity-cleaner';
 
 export default function PostCardContentFrontPage(props) {
+
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
 
   // Converts the ms from epoch to more "human" units
   const processTime = (date) => {
@@ -20,7 +23,16 @@ export default function PostCardContentFrontPage(props) {
     }
   }
 
-  // JSX markup for the component
+  // Hook to apply the Profanity Filter to the text and title of the post
+  useEffect(() => {
+    if (props.title) {
+      setTitle(clean(props.title, { keepFirstAndLastChar: true }));
+    }
+    if (props.text) {
+      setText(clean(props.text, { keepFirstAndLastChar: true }));
+    }
+  }, [props.text, props.title])
+
   return (
     <div id="info" className="flex flex-col gap-1 w-full cursor-pointer">
       {/* User and time information */}
@@ -30,7 +42,7 @@ export default function PostCardContentFrontPage(props) {
       </div>
       {/* Post Title */}
       <div id="title" className="text-lg h-8">
-        { clean(props.title, { keepFirstAndLastChar: true }) }
+        { title }
       </div>
       {/* Post Image */}
       { props.imageLink &&
@@ -47,7 +59,7 @@ export default function PostCardContentFrontPage(props) {
       {/* Post Text */}
       { props.text &&
         <div className="flex flex-col gap-1 w-[34rem] line-clamp-6" id="text">
-          <span className="line-clamp-6 pr-10">{ clean(props.text, { keepFirstAndLastChar: true }) }</span>
+          <span className="line-clamp-6 pr-10">{ text }</span>
         </div>
       } 
       {/* Post Comments */}

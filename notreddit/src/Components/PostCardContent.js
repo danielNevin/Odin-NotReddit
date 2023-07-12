@@ -10,7 +10,8 @@ export default function PostCardContent(props) {
 
   // State variables
   const [isEditClicked, setIsEditClicked] = useState(false);
-  const [text, setText] = useState();
+  const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
 
   // Event handlers
   const handleEditClick = () => {
@@ -64,12 +65,15 @@ export default function PostCardContent(props) {
     }
   }
 
-  // Hook to apply the Profanity Filter to the text within the post
+  // Hook to apply the Profanity Filter to the text and title of the post
   useEffect(() => {
+    if (props.title) {
+      setTitle(clean(props.title, { keepFirstAndLastChar: true }));
+    }
     if (props.text) {
       setText(clean(props.text, { keepFirstAndLastChar: true }));
     }
-  }, [props.text])
+  }, [props.text, props.title])
 
   return (
     <div id="info" className="flex flex-col gap-1">
@@ -78,7 +82,7 @@ export default function PostCardContent(props) {
         <span>{ processTime(props.creationDate) } ago</span>
       </div>
       <div id="title" className="text-lg h-8">
-        { clean(props.title, { keepFirstAndLastChar: true }) }
+        { title }
       </div>
       { props.imageLink &&
         <div className="pr-10" id="image">
@@ -86,7 +90,7 @@ export default function PostCardContent(props) {
         </div>
       }
       { props.postLink &&
-        <div className="pr-10" id="postLink">
+        <div className="pr-10" id="postLink"> 
           <Link to={ props.postLink } className="text-blue-600 hover:underline">{ props.postLink }</Link>
         </div>
       }
