@@ -1,10 +1,10 @@
 // Importing Dependencies
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function FilterPosts(props) {
 
   // State variables to keep track of filter clicks
-  const [topClick, setTopClick] = useState(true);
+  const [topClick, setTopClick] = useState(false);
   const [newClick, setNewClick] = useState(false);
   const [oldClick, setOldClick] = useState(false);
 

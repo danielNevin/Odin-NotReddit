@@ -18,7 +18,7 @@ export default function PostScoreAuth(props) {
       setDownvoteClick(false);
       setScore(score - 1);
       const docRef = await doc(db, "Votes", props.id);
-      await updateDoc(docRef, {
+      updateDoc(docRef, {
         [auth.currentUser.uid]: 0
       });
 
@@ -28,7 +28,7 @@ export default function PostScoreAuth(props) {
       setDownvoteClick(false);
       setScore(score + 2);
       const docRef = await doc(db, "Votes", props.id);
-      await updateDoc(docRef, {
+      updateDoc(docRef, {
         [auth.currentUser.uid]: 1
       });
 
@@ -119,15 +119,17 @@ export default function PostScoreAuth(props) {
   // If the user has already voted on this Post, set the conditions of the vote
   useEffect(() => {
     setScore(props.score)
-    if (props.votes) {
+    if (props.votes[auth.currentUser.uid]) {
       if (props.votes[auth.currentUser.uid] === 1) {
         setUpvoteClick(true);
+        setDownvoteClick(false);
       }
       if (props.votes[auth.currentUser.uid] === -1) {
+        setUpvoteClick(false);
         setDownvoteClick(true);
       }
     }
-  }, [])
+  }, [props.posts])
 
   return (
     <div id="container" className="flex flex-col justify-center items-center w-6 gap-1 p-1">

@@ -16,9 +16,31 @@ export default function FrontPage(props) {
   // State variable to store the posts
   const [posts, setPosts] = useState([]);
 
+  // Function to handle the preliminary render
+  const handleFilterRender = (postsArray) => {
+    const sortedArray = [...postsArray].sort((a, b) => {
+      if (a.score > b.score) {
+        return -1;
+      } else if (a.score < b.score) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    return sortedArray;
+  }
+
   // Event handler for the top filter click
   const handleFilterTop = () => {
-    const sortedArray = [...posts].sort((a, b) => b.score - a.score);
+    const sortedArray = [...posts].sort((a, b) => {
+      if (a.score > b.score) {
+        return -1
+      } else if (a.score < b.score) {
+        return 1
+      } else {
+        return 0
+      }
+    });
     setPosts(sortedArray);
   }
 
@@ -34,13 +56,8 @@ export default function FrontPage(props) {
     setPosts(sortedArray);
   }
 
-  // Function to handle the page load
-  const handlePageLoad = () => {
-    setPosts(props.posts);
-  }
-
   useEffect(() => {
-    handlePageLoad();
+    setPosts(props.posts);
   }, [props.posts]);
 
   useEffect(() => {
@@ -52,7 +69,7 @@ export default function FrontPage(props) {
     return(
       <div id="container" key={ index } className="flex px-4 py-2 gap-4 w-[40rem] rounded-md border bg-white shadow-md hover:shadow-lg hover:translate-y-[-3px] transition-all">
         <div id="score">
-          { auth.currentUser ? <PostScoreAuth score={ post.score } votes={ post.votes } id={ post.id }/> : <PostScoreNoAuth score={ post.score }/> }
+          { auth.currentUser ? <PostScoreAuth posts={ posts } score={ post.score } votes={ post.votes } id={ post.id }/> : <PostScoreNoAuth score={ post.score }/> }
         </div>
         <Link to={`/post/${ post.id }`}>
           <PostCardContentFrontPage id={ post.id } title={ post.title } creationDate={ post.creationDate } text={ post.text } imageLink={ post.imageLink } postLink={ post.postLink } score={ post.score } user={ post.user } commentsCount={ post.commentsCount } />
