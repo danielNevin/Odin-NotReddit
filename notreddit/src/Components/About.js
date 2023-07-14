@@ -92,7 +92,7 @@ export default function About() {
       </div>
       {/* Middle div */}
       <div className="flex flex-col px-8 py-4 gap-2 rounded-md border bg-white shadow-md transition-all items-center" onMouseEnter={ handleMidDivHover } onMouseLeave={ handleMouseLeave }>
-        <p className="text-justify text-gray-500">This project was built using the following tech stack:</p>
+        <p className="text-gray-500">This project was built using the following tech stack:</p>
         <ul className="list-disc px-8">
           <li className={ reactClasses() }>React</li>
           <li className={ tailwindClasses() }>Tailwind CSS</li>
@@ -101,7 +101,7 @@ export default function About() {
       </div>
       {/* Bottom div */}
       <div className="flex flex-col px-8 py-4 gap-4 rounded-md border bg-white shadow-md transition-all">
-        <p className="text-justify text-gray-500">If you have any questions regarding the project, feel free to contact me via my GitHub.</p>
+        <p className="text-gray-500">If you have any questions regarding the project, feel free to contact me via my GitHub.</p>
         <div className="flex items-center justify-center w-full">
           <a href="https://github.com/dnevin234">
             {/* GitHub logo */}
