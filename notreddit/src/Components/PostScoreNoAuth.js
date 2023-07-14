@@ -45,7 +45,7 @@ export default function PostScoreNoAuth(props) {
   return (
     <div id="container" className="flex flex-col justify-center items-center w-6 gap-1 p-1">
       {/* Links to Login page when user with no auth clicks */}
-      <Link to="/login">
+      <Link to="/login" className="h-5">
         <button id="upvote" className="bg-white rounded-sm hover:bg-gray-100 cursor-pointer transition-all p-[0.1rem]" onMouseEnter={ handleUpvoteHover } onMouseLeave={ handleMouseLeave }> 
           <svg className={ upvoteSVGClasses() } xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="16">
             <path d="M433-149v-482L216-413l-67-67 331-331 331 331-66 67-218-218v482h-94Z"/>
@@ -56,7 +56,7 @@ export default function PostScoreNoAuth(props) {
         { props.score }
       </span>
       {/* Links to Login page when user with no auth clicks */}
-      <Link to="/login">
+      <Link to="/login" className="h-5">
         <button id="downvote" className="bg-white rounded-sm hover:bg-gray-100 cursor-pointer transition-all p-[0.1rem]" onMouseEnter={ handleDownvoteHover } onMouseLeave={ handleMouseLeave }>
           <svg className={ downvoteSVGClasses() } xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="16">
             <path d="M480-149 149-480l67-67 217 217v-481h94v481l218-217 66 67-331 331Z"/>
