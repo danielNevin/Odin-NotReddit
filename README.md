@@ -1,5 +1,7 @@
 # This is NotReddit
 
+![Image](notreddit/src/Resources/Screencap/NotReddit.png)
+
 NotReddit is my shot at building a "Reddit-Like" social media platform as a submission for The Odin Project's final JavaScript Project.
 
 The project was built using React, TailwindCSS, and Firebase.
