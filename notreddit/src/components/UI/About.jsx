@@ -64,12 +64,12 @@ export default function About() {
     return classes;
   }
 
-  // Handle dynamic styling for the Firebase text in the middle div
-  const firebaseClasses = () => {
+  // Handle dynamic styling for the Supabase text in the middle div
+  const supabaseClasses = () => {
     let classes = 'text-gray-500 font-semibold transition-all';
 
     if (isMidDivHovered) {
-      classes = 'text-amber-400 font-semibold transition-all'
+      classes = 'text-emerald-500 font-semibold transition-all'
     }
 
     return classes;
@@ -96,7 +96,7 @@ export default function About() {
         <ul className="list-disc px-8">
           <li className={ reactClasses() }>React</li>
           <li className={ tailwindClasses() }>Tailwind CSS</li>
-          <li className={ firebaseClasses() }>Firebase Firestore</li>
+          <li className={ supabaseClasses() }>Supabase Postgres DB</li>
         </ul>
       </div>
       {/* Bottom div */}
