@@ -4,7 +4,7 @@
 
 NotReddit is my shot at building a "Reddit-Like" social media platform as a submission for The Odin Project's final JavaScript Project.
 
-The project was built using React and TailwindCSS, with the database being a full Postgres database hoted through Supabase.
+The project was built using React and TailwindCSS, with the database being a full Postgres database hosted through Supabase.
 
 ## Functionality
 
